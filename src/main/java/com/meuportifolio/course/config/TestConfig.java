@@ -1,14 +1,8 @@
 package com.meuportifolio.course.config;
 
-import com.meuportifolio.course.entities.Category;
-import com.meuportifolio.course.entities.Order;
-import com.meuportifolio.course.entities.Product;
-import com.meuportifolio.course.entities.User;
+import com.meuportifolio.course.entities.*;
 import com.meuportifolio.course.entities.enums.OrderStatus;
-import com.meuportifolio.course.repositories.CategoryRepository;
-import com.meuportifolio.course.repositories.OrderRepository;
-import com.meuportifolio.course.repositories.ProductRepository;
-import com.meuportifolio.course.repositories.UserRepository;
+import com.meuportifolio.course.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
@@ -32,6 +26,9 @@ public class TestConfig implements CommandLineRunner {
 
     @Autowired // independence injection of product
     private ProductRepository productRepository;
+
+    @Autowired // independence injection of items
+    private OrderItemRepository orderItemRepository;
 
 
     @Override
@@ -80,5 +77,13 @@ public class TestConfig implements CommandLineRunner {
         p5.getCategories().add(cat2);
 
         productRepository.saveAll(Arrays.asList(p1, p2, p3, p4, p5));
+
+
+        OrderItem oi1 = new OrderItem(o1, p1, 2, p1.getPrice());
+        OrderItem oi2 = new OrderItem(o1, p3, 1, p3.getPrice());
+        OrderItem oi3 = new OrderItem(o2, p3, 2, p3.getPrice());
+        OrderItem oi4 = new OrderItem(o3, p5, 2, p5.getPrice());
+
+        orderItemRepository.saveAll(Arrays.asList(oi1, oi2, oi3, oi4));
     }
 }

@@ -1,5 +1,6 @@
 package com.meuportifolio.course.entities.pk;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.meuportifolio.course.entities.Order;
 import com.meuportifolio.course.entities.Product;
 import jakarta.persistence.Embeddable;
@@ -15,6 +16,7 @@ public class OrderItemPk implements Serializable {
     @ManyToOne
     @JoinColumn(name = "order_id")
     private Order order;
+
     @ManyToOne
     @JoinColumn(name = "product_id")
     private Product product;
